@@ -1,0 +1,2 @@
+Send-MailMessage -to windowsadmins@ochin.org -Subject "Report of SA accounts disabled" -body "Disabled datacenter account report see attached for list of disabled accounts.
+ This activity is a scheduled task run from DCUTILS01 via script C:\Automate\Scripts\DisableDataDomainUsers.cmd"-SMTPSERVER esyrelay.community-health.org -From alerts.ADcleanuptask@ochin.org -Attachments $Args
