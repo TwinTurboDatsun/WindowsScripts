@@ -18,7 +18,7 @@ Send-MailMessage -to $EmailAddr -Subject "User Report for SA$ServiceArea" -Body 
 # call external command to create file, then use PS to distribute
 Function External-OldCMP {
 & C:\Automate\Scripts\oldcmp.exe -b OU="Service Area Accounts",DC="community-health",DC="org" -users -llts -age 60 -report -format csv -file C:\Automate\Reports\SA$ServiceArea"DataDomainUserReport"$Datetime01".txt"
-Send-MailMessage -to $EmailAddr -Subject "User Report for SA$ServiceArea" -Body "As requested" -SMTPSERVER mailhost.community-health.org -From DCUTILS01@ochin.org -Attachments C:\Automate\Reports\SA$ServiceArea"DataDomainUserReport"$Datetime01".txt"
+Send-MailMessage -to $EmailAddr -Subject "User Report for SA$ServiceArea" -Body "As requested" -SMTPSERVER esyrelay.community-health.org -From DCUTILS01@ochin.org -Attachments C:\Automate\Reports\SA$ServiceArea"DataDomainUserReport"$Datetime01".txt"
 }
 
 Function LastDate {
@@ -51,7 +51,7 @@ $NumOfDays =[Microsoft.VisualBasic.Interaction]::InputBox("Days account ihas ben
 Function SAUserSearch {
 . InputTest1
 Get-ADUser -Filter * -Searchbase "OU=SA$ServiceArea,OU=Service Area Accounts,dc=community-health,dc=org" -Properties Displayname, LastLogonDate | sort-object displayname | ft displayname, LastLogonDate, enabled -autosize | Out-File C:\Automate\Reports\SA$ServiceArea"DataDomainUserReport"$Datetime01".txt"
-Send-MailMessage -to $EmailAddr -Subject "User Report for SA$ServiceArea" -Body "Remote acces user report as requested, see attached." -SMTPSERVER mailhost.community-health.org -From DCUTILS01@ochin.org -Attachments C:\Automate\Reports\SA$ServiceArea"DataDomainUserReport"$Datetime01".txt"
+Send-MailMessage -to $EmailAddr -Subject "User Report for SA$ServiceArea" -Body "Remote acces user report as requested, see attached." -SMTPSERVER esyrelay.community-health.org -From DCUTILS01@ochin.org -Attachments C:\Automate\Reports\SA$ServiceArea"DataDomainUserReport"$Datetime01".txt"
 }
 
 . disableold
